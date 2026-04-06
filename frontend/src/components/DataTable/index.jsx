@@ -15,7 +15,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
     {
       title: "",
       render: (row) => (
-        <Dropdown overlay={DropDownRowMenu({ row })} trigger={["click"]}>
+        <Dropdown menu={{ items: DropDownRowMenu({ row }) }} trigger={["click"]}>
           <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
         </Dropdown>
       ),

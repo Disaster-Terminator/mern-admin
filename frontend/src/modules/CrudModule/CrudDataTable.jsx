@@ -1,12 +1,11 @@
 import React from "react";
 
-import { Button, Menu } from "antd";
+import { Button } from "antd";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
 import { selectItemById } from "@/redux/crud/selectors";
 import { useCrudContext } from "@/context/crud";
-import uniqueId from "@/utils/uinqueId";
 import DataTable from "@/components/DataTable";
 
 function AddNewItem({ config }) {
@@ -45,23 +44,26 @@ function DropDownRowMenu({ row }) {
     dispatch(crud.currentAction("delete", item));
     modal.open();
   }
-  return (
-    <Menu style={{ width: 130 }}>
-      <Menu.Item key={`${uniqueId()}`} icon={<EyeOutlined />} onClick={Show}>
-        Show
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
-        Edit
-      </Menu.Item>
-      <Menu.Item
-        key={`${uniqueId()}`}
-        icon={<DeleteOutlined />}
-        onClick={Delete}
-      >
-        Delete
-      </Menu.Item>
-    </Menu>
-  );
+  return [
+    {
+      key: `show-${row._id}`,
+      icon: <EyeOutlined />,
+      label: "Show",
+      onClick: Show,
+    },
+    {
+      key: `edit-${row._id}`,
+      icon: <EditOutlined />,
+      label: "Edit",
+      onClick: Edit,
+    },
+    {
+      key: `delete-${row._id}`,
+      icon: <DeleteOutlined />,
+      label: "Delete",
+      onClick: Delete,
+    },
+  ];
 }
 
 export default function CrudDataTable({ config }) {

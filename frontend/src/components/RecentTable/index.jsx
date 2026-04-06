@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Menu, Table } from "antd";
+import { Dropdown, Table } from "antd";
 
 import { request } from "@/request";
 import useFetch from "@/hooks/useFetch";
@@ -15,19 +15,26 @@ function DropDownRowMenu({ row }) {
   const Show = () => {};
   function Edit() {}
   function Delete() {}
-  return (
-    <Menu style={{ width: 130 }}>
-      <Menu.Item icon={<EyeOutlined />} onClick={Show}>
-        Show
-      </Menu.Item>
-      <Menu.Item icon={<EditOutlined />} onClick={Edit}>
-        Edit
-      </Menu.Item>
-      <Menu.Item icon={<DeleteOutlined />} onClick={Delete}>
-        Delete
-      </Menu.Item>
-    </Menu>
-  );
+  return [
+    {
+      key: `show-${row._id}`,
+      icon: <EyeOutlined />,
+      label: "Show",
+      onClick: Show,
+    },
+    {
+      key: `edit-${row._id}`,
+      icon: <EditOutlined />,
+      label: "Edit",
+      onClick: Edit,
+    },
+    {
+      key: `delete-${row._id}`,
+      icon: <DeleteOutlined />,
+      label: "Delete",
+      onClick: Delete,
+    },
+  ];
 }
 
 export default function RecentTable({ ...props }) {
@@ -37,7 +44,7 @@ export default function RecentTable({ ...props }) {
     {
       title: "",
       render: (row) => (
-        <Dropdown overlay={DropDownRowMenu({ row })} trigger={["click"]}>
+        <Dropdown menu={{ items: DropDownRowMenu({ row }) }} trigger={["click"]}>
           <EllipsisOutlined style={{ cursor: "pointer", fontSize: "24px" }} />
         </Dropdown>
       ),

@@ -5,7 +5,6 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 import { login } from "@/redux/auth/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "@/redux/auth/actions";
 import { selectAuth } from "@/redux/auth/selectors";
 const { Content, Footer } = Layout;
 
@@ -86,12 +85,10 @@ const LoginPage = () => {
                   </Form.Item>
                   <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                      <Checkbox>Remember me</Checkbox>
+                      <Checkbox>记住登录状态</Checkbox>
                     </Form.Item>
 
-                    <a className="login-form-forgot" href="">
-                      Forgot password
-                    </a>
+                    <span className="login-form-forgot">演示环境账号已初始化</span>
                   </Form.Item>
 
                   <Form.Item>
@@ -103,7 +100,7 @@ const LoginPage = () => {
                     >
                       登录系统
                     </Button>
-                    测试账号可直接输入任意邮箱与密码
+                    演示账号：admin@demo.com / 123456
                   </Form.Item>
                 </Form>
               </div>

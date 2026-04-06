@@ -25,7 +25,7 @@ export default function DeleteModal({ config }) {
     if (isSuccess) {
       modal.close();
       dispatch(crud.list(entity));
-      dispatch(crud.resetAction(entity));
+      dispatch(crud.resetAction("delete"));
     }
     if (current) {
       let labels = entityDisplayLabels
@@ -46,7 +46,7 @@ export default function DeleteModal({ config }) {
   return (
     <Modal
       title={modalTitle}
-      visible={isModalOpen}
+      open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}
