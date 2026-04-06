@@ -17,11 +17,11 @@ function App() {
       <>
         <Result
           status="404"
-          title="No Internet Connection"
-          subTitle="Check your Internet Connection or your network."
+          title="网络连接不可用"
+          subTitle="请检查网络后重试，以继续访问 StudyHub。"
           extra={
             <Button href="/" type="primary">
-              Try Again
+              重新加载
             </Button>
           }
         />

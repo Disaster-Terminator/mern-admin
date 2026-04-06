@@ -4,6 +4,7 @@ const { askStudyAssistant } = require("../services/openaiService");
 const Course = mongoose.model("Course");
 const Task = mongoose.model("Task");
 const Note = mongoose.model("Note");
+const ReviewPlan = mongoose.model("ReviewPlan");
 const AiLog = mongoose.model("AiLog");
 
 const summarize = (text, max = 280) => {
@@ -19,15 +20,18 @@ exports.statistics = async (req, res) => {
       tasksCount,
       completedTasksCount,
       notesCount,
+      reviewPlansCount,
       aiUsageCount,
       tasksByCourse,
       notesByCourse,
       tasksByStatus,
+      reviewPlansByStatus,
     ] = await Promise.all([
       Course.countDocuments(),
       Task.countDocuments(),
       Task.countDocuments({ status: "completed" }),
       Note.countDocuments(),
+      ReviewPlan.countDocuments(),
       AiLog.countDocuments(),
       Task.aggregate([
         {
@@ -55,6 +59,14 @@ exports.statistics = async (req, res) => {
           },
         },
       ]),
+      ReviewPlan.aggregate([
+        {
+          $group: {
+            _id: { $ifNull: ["$status", "pending"] },
+            count: { $sum: 1 },
+          },
+        },
+      ]),
     ]);
 
     return res.status(200).json({
@@ -65,11 +77,13 @@ exports.statistics = async (req, res) => {
           tasksCount,
           completedTasksCount,
           notesCount,
+          reviewPlansCount,
           aiUsageCount,
         },
         tasksByCourse,
         notesByCourse,
         tasksByStatus,
+        reviewPlansByStatus,
       },
       message: "统计数据获取成功",
     });
@@ -135,7 +149,9 @@ exports.aiAssistant = async (req, res) => {
       configured: true,
     })
       .save()
-      .catch(() => null);
+      .catch((logError) => {
+        console.error(`AI 日志写入失败: ${logError.message}`);
+      });
 
     return res.status(500).json({
       success: false,

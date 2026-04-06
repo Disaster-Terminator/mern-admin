@@ -64,7 +64,6 @@ export const crud = {
       keyState: "create",
       payload: null,
     });
-    console.log("jsonData action redux", jsonData);
     let data = await request.create(entity, jsonData);
 
     if (data.success === true) {

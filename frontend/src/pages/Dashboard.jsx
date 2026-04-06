@@ -42,7 +42,7 @@ export default function Dashboard() {
         <Col>
           <h1 style={{ marginBottom: 0 }}>StudyHub 首页概览</h1>
           <p style={{ color: "#666", marginBottom: 0 }}>
-            智能学习任务管理系统 MVP 演示版
+            学习进度、任务状态与复习安排总览
           </p>
         </Col>
         <Col>
@@ -56,33 +56,40 @@ export default function Dashboard() {
         <Alert
           showIcon
           type="warning"
-          message="暂未获取到数据"
-          description="请先创建课程、任务、笔记后再查看概览。"
+          message="暂未获取到概览数据"
+          description="请确认后端服务已启动，并已准备课程、任务、笔记和复习计划数据。"
           style={{ marginBottom: 16 }}
         />
       ) : null}
 
       <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12} lg={8} xl={4}>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
           <OverviewCard title="课程总数" value={overview.coursesCount || 0} color="#2f54eb" />
         </Col>
-        <Col xs={24} sm={12} lg={8} xl={4}>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
           <OverviewCard title="任务总数" value={overview.tasksCount || 0} color="#faad14" />
         </Col>
-        <Col xs={24} sm={12} lg={8} xl={4}>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
           <OverviewCard
             title="已完成任务"
             value={overview.completedTasksCount || 0}
             color="#52c41a"
           />
         </Col>
-        <Col xs={24} sm={12} lg={8} xl={4}>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
           <OverviewCard title="笔记数" value={overview.notesCount || 0} color="#13c2c2" />
         </Col>
-        <Col xs={24} sm={12} lg={8} xl={4}>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
+          <OverviewCard
+            title="复习计划数"
+            value={overview.reviewPlansCount || 0}
+            color="#722ed1"
+          />
+        </Col>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
           <OverviewCard title="AI 使用次数" value={overview.aiUsageCount || 0} color="#eb2f96" />
         </Col>
-        <Col xs={24} sm={12} lg={8} xl={4}>
+        <Col xs={24} sm={12} lg={8} xl={6} xxl={4}>
           <Card title="任务完成率" bodyStyle={{ padding: 12 }}>
             <Progress type="dashboard" percent={completionRate} />
           </Card>
@@ -111,7 +118,7 @@ export default function Dashboard() {
                 ]}
               />
             ) : (
-              <Empty description="暂无任务分布数据" />
+              <Empty description="暂无任务分布数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
             )}
           </Card>
         </Col>

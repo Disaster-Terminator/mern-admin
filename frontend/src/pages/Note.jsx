@@ -11,7 +11,7 @@ function Note() {
     outputValue: "_id",
   };
 
-  const panelTitle = "学习笔记管理";
+  const panelTitle = "学习笔记";
   const dataTableTitle = "笔记列表";
   const entityDisplayLabels = ["title"];
 

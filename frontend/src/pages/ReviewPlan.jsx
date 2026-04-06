@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Tag } from "antd";
+import { Switch, Tag, message } from "antd";
 import { useDispatch } from "react-redux";
 
 import CrudModule from "@/modules/CrudModule";
@@ -10,7 +10,7 @@ import { crud } from "@/redux/crud/actions";
 function ReviewStatusTag({ status }) {
   return (
     <Tag color={status === "completed" ? "green" : "orange"}>
-      {status === "completed" ? "已完成" : "未完成"}
+      {status === "completed" ? "已完成" : "待办"}
     </Tag>
   );
 }
@@ -23,8 +23,14 @@ function ReviewStatusSwitch({ row }) {
   const toggleStatus = async () => {
     setLoading(true);
     const nextStatus = isCompleted ? "pending" : "completed";
-    await request.patch(`reviewplan/update/${row._id}`, { status: nextStatus });
-    dispatch(crud.list("reviewplan"));
+    const data = await request.patch(`reviewplan/update/${row._id}`, {
+      status: nextStatus,
+    });
+    if (data && data.success) {
+      dispatch(crud.list("reviewplan"));
+    } else {
+      message.error((data && data.message) || "复习计划状态切换失败，请稍后重试");
+    }
     setLoading(false);
   };
 
@@ -47,7 +53,7 @@ function ReviewPlan() {
     outputValue: "_id",
   };
 
-  const panelTitle = "复习计划管理";
+  const panelTitle = "复习计划";
   const dataTableTitle = "复习计划列表";
   const entityDisplayLabels = ["course", "target"];
 
@@ -85,7 +91,7 @@ function ReviewPlan() {
       dataIndex: "reviewDate",
     },
     {
-      title: "目标",
+      title: "复习目标",
       dataIndex: "target",
     },
     {

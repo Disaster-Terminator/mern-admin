@@ -11,8 +11,8 @@ export default function DeleteModal({ config }) {
   let {
     entity,
     entityDisplayLabels,
-    deleteMessage = "Do you want delete : ",
-    modalTitle = "Remove Item",
+    deleteMessage = "确认删除以下内容：",
+    modalTitle = "删除确认",
   } = config;
   const dispatch = useDispatch();
   const { current, isLoading, isSuccess } = useSelector(selectDeletedItem);
@@ -50,6 +50,8 @@ export default function DeleteModal({ config }) {
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={isLoading}
+      okText="确认删除"
+      cancelText="取消"
     >
       <p>
         {deleteMessage}

@@ -16,7 +16,7 @@ const errorHandler = (error, emptyResult = null) => {
     return {
       success: false,
       result: emptyResult,
-      message: "Cannot connect to the server, Check your internet network",
+      message: "无法连接服务器，请检查网络或后端服务状态",
     };
   } else if (response && response.status) {
     const message = response.data && response.data.message;
@@ -26,7 +26,7 @@ const errorHandler = (error, emptyResult = null) => {
       duration: 20,
     });
     notification.error({
-      message: `Request error ${status}`,
+      message: `请求失败 ${status}`,
       description: errorText,
     });
     if (error.response.data.jwtExpired) {
@@ -38,13 +38,13 @@ const errorHandler = (error, emptyResult = null) => {
       duration: 20,
     });
     notification.error({
-      message: "Unknown Error",
-      description: "An unknown error occurred in the app, please try again. ",
+      message: "未知错误",
+      description: "应用发生未知错误，请稍后重试。",
     });
     return {
       success: false,
       result: emptyResult,
-      message: "An unknown error occurred in the app, please try again. ",
+      message: "应用发生未知错误，请稍后重试。",
     };
   }
 };

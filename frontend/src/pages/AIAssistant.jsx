@@ -15,12 +15,19 @@ export default function AIAssistant() {
     const data = await request.post("studyhub/ai-assistant", values);
 
     if (data && data.success) {
-      setResult(data.result);
+      setResult({
+        ...data.result,
+        message: data.message,
+        isError: false,
+      });
     } else {
       setResult({
-        configured: true,
-        output: "",
-        message: (data && data.message) || "AI 调用失败，请稍后重试",
+        configured:
+          data && data.result && data.result.configured === false ? false : true,
+        output: (data && data.result && data.result.output) || "",
+        model: data && data.result && data.result.model,
+        message: (data && data.message) || "AI 服务暂时不可用，请稍后再试",
+        isError: true,
       });
     }
 
@@ -29,6 +36,12 @@ export default function AIAssistant() {
 
   return (
     <DashboardLayout>
+      <div style={{ marginBottom: 20 }}>
+        <h1 style={{ marginBottom: 0 }}>AI 学习助手</h1>
+        <p style={{ marginBottom: 0, color: "#666" }}>
+          基于课程、任务与笔记内容生成可执行学习建议，并自动记录调用日志。
+        </p>
+      </div>
       <Row gutter={[20, 20]}>
         <Col xs={24} lg={10}>
           <Card title="AI 学习助手">
@@ -69,8 +82,8 @@ export default function AIAssistant() {
               <Alert
                 showIcon
                 type="info"
-                message="请在左侧输入信息并点击生成"
-                description="结果会展示在这里，并自动写入 ai_logs 集合。"
+                message="输入学习信息后即可生成建议"
+                description="系统会将每次请求记录到 ai_logs，便于后续学习复盘与统计展示。"
               />
             ) : null}
 
@@ -78,12 +91,15 @@ export default function AIAssistant() {
               <Alert
                 showIcon
                 type="warning"
-                message="AI API 未配置"
-                description={result.message || "请在 .variables.env 中配置 OPENAI_API_KEY"}
+                message="AI 助手暂未启用"
+                description={
+                  result.message ||
+                  "当前环境未配置 OPENAI_API_KEY。你仍可体验完整页面流程，系统会保留操作日志。"
+                }
               />
             ) : null}
 
-            {!loading && result && result.configured !== false ? (
+            {!loading && result && result.configured !== false && !result.isError ? (
               <>
                 <Alert
                   showIcon
@@ -105,6 +121,15 @@ export default function AIAssistant() {
                   {result.output || "本次未返回可读内容"}
                 </div>
               </>
+            ) : null}
+
+            {!loading && result && result.configured !== false && result.isError ? (
+              <Alert
+                showIcon
+                type="error"
+                message="AI 请求未成功"
+                description={result.message || "请检查服务配置后重试"}
+              />
             ) : null}
           </Card>
         </Col>

@@ -4,6 +4,7 @@ const MongoStore = require("connect-mongo");
 const path = require("path");
 const bodyParser = require("body-parser");
 const promisify = require("es6-promisify");
+const { resolveDatabaseConfig } = require("./config/database");
 
 const apiRouter = require("./routes/api");
 const authApiRouter = require("./routes/authApi");
@@ -13,6 +14,8 @@ const errorHandlers = require("./handlers/errorHandlers");
 const { isValidToken } = require("./controllers/authController");
 
 require("dotenv").config({ path: ".variables.env" });
+
+const { mongoUri } = resolveDatabaseConfig();
 
 // create our Express app
 const app = express();
@@ -32,7 +35,7 @@ app.use(
     key: process.env.KEY,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DATABASE }),
+    store: MongoStore.create({ mongoUrl: mongoUri }),
   })
 );
 

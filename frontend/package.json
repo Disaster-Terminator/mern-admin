@@ -20,10 +20,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider craco start",
     "dev:remote": "cross-env REACT_APP_DEV_REMOTE=remote npm start",
-    "build": "craco build",
-    "test": "craco test",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider craco build",
+    "test": "cross-env NODE_OPTIONS=--openssl-legacy-provider craco test",
     "eject": "react-scripts eject"
   },
   "browserslist": {

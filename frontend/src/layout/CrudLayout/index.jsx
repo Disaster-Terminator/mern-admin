@@ -29,10 +29,10 @@ export default function CrudLayout({
           <Content
             className="site-layout-background"
             style={{
-              padding: "50px 40px",
-              margin: "50px auto",
+              padding: "30px 32px",
+              margin: "20px auto",
               width: "100%",
-              maxWidth: "1000px",
+              maxWidth: "1100px",
             }}
           >
             {children}

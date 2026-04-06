@@ -42,7 +42,7 @@ export default function TaskForm() {
       </Form.Item>
       <Form.Item label="状态" name="status" initialValue="pending">
         <Select>
-          <Select.Option value="pending">进行中</Select.Option>
+          <Select.Option value="pending">待办</Select.Option>
           <Select.Option value="completed">已完成</Select.Option>
         </Select>
       </Form.Item>

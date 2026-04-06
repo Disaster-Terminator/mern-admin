@@ -17,6 +17,13 @@ import { DashboardLayout } from "@/layout";
 import { request } from "@/request";
 import useOnFetch from "@/hooks/useOnFetch";
 
+const statusLabelMap = {
+  pending: "待办",
+  completed: "已完成",
+};
+
+const normalizeStatus = (value) => statusLabelMap[value] || value || "未定义";
+
 export default function Statistics() {
   const { onFetch, result, isLoading, isSuccess } = useOnFetch();
 
@@ -38,14 +45,15 @@ export default function Statistics() {
   const tasksByCourse = (result && result.tasksByCourse) || [];
   const notesByCourse = (result && result.notesByCourse) || [];
   const tasksByStatus = (result && result.tasksByStatus) || [];
+  const reviewPlansByStatus = (result && result.reviewPlansByStatus) || [];
 
   return (
     <DashboardLayout>
       <Row justify="space-between" align="middle" style={{ marginBottom: 20 }}>
         <Col>
-          <h1 style={{ marginBottom: 0 }}>数据访问与统计</h1>
+          <h1 style={{ marginBottom: 0 }}>StudyHub 数据统计</h1>
           <p style={{ marginBottom: 0, color: "#666" }}>
-            基于 MongoDB 聚合结果实时展示学习数据
+            基于真实数据库聚合结果的学习数据分析看板
           </p>
         </Col>
         <Col>
@@ -86,6 +94,11 @@ export default function Statistics() {
             <Col xs={24} md={8} lg={6}>
               <Card>
                 <Statistic title="笔记数量" value={overview.notesCount || 0} />
+              </Card>
+            </Col>
+            <Col xs={24} md={8} lg={6}>
+              <Card>
+                <Statistic title="复习计划数量" value={overview.reviewPlansCount || 0} />
               </Card>
             </Col>
             <Col xs={24} md={8} lg={6}>
@@ -141,21 +154,50 @@ export default function Statistics() {
 
           <div style={{ height: 24 }} />
 
-          <Card title="任务状态统计">
-            {tasksByStatus.length ? (
-              <Table
-                rowKey={(item) => `${item._id}-status`}
-                pagination={false}
-                dataSource={tasksByStatus}
-                columns={[
-                  { title: "状态", dataIndex: "_id" },
-                  { title: "数量", dataIndex: "count" },
-                ]}
-              />
-            ) : (
-              <Empty description="暂无状态数据" />
-            )}
-          </Card>
+          <Row gutter={[16, 16]}>
+            <Col xs={24} lg={12}>
+              <Card title="任务状态统计">
+                {tasksByStatus.length ? (
+                  <Table
+                    rowKey={(item) => `${item._id}-task-status`}
+                    pagination={false}
+                    dataSource={tasksByStatus}
+                    columns={[
+                      {
+                        title: "状态",
+                        dataIndex: "_id",
+                        render: normalizeStatus,
+                      },
+                      { title: "数量", dataIndex: "count" },
+                    ]}
+                  />
+                ) : (
+                  <Empty description="暂无任务状态数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                )}
+              </Card>
+            </Col>
+            <Col xs={24} lg={12}>
+              <Card title="复习计划状态统计">
+                {reviewPlansByStatus.length ? (
+                  <Table
+                    rowKey={(item) => `${item._id}-review-status`}
+                    pagination={false}
+                    dataSource={reviewPlansByStatus}
+                    columns={[
+                      {
+                        title: "状态",
+                        dataIndex: "_id",
+                        render: normalizeStatus,
+                      },
+                      { title: "数量", dataIndex: "count" },
+                    ]}
+                  />
+                ) : (
+                  <Empty description="暂无复习计划状态数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                )}
+              </Card>
+            </Col>
+          </Row>
         </>
       ) : null}
     </DashboardLayout>

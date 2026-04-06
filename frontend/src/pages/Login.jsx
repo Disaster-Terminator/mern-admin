@@ -25,16 +25,19 @@ const LoginPage = () => {
   return (
     <>
       <Layout className="layout">
-        <Row>
-          <Col span={12} offset={6}>
+        <Row justify="center">
+          <Col xs={22} sm={16} md={12} lg={10} xl={8}>
             <Content
               style={{
-                padding: "150px 0 180px",
-                maxWidth: "360px",
+                padding: "120px 0 160px",
+                maxWidth: "400px",
                 margin: "0 auto",
               }}
             >
-              <h1>StudyHub 登录</h1>
+              <h1 style={{ marginBottom: 8 }}>StudyHub</h1>
+              <p style={{ color: "#666", marginBottom: 0 }}>
+                智能学习任务管理系统登录
+              </p>
               {/* {error && (
                 <ErrorNotice
                   message={error}
@@ -43,7 +46,6 @@ const LoginPage = () => {
               )} */}
               <Divider />
               <div className="site-layout-content">
-                {" "}
                 <Form
                   name="normal_login"
                   className="login-form"
@@ -57,13 +59,13 @@ const LoginPage = () => {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Email!",
+                        message: "请输入登录邮箱",
                       },
                     ]}
                   >
                     <Input
                       prefix={<UserOutlined className="site-form-item-icon" />}
-                      placeholder="admin@demo.com"
+                      placeholder="请输入邮箱，例如：admin@demo.com"
                       autoComplete="off"
                     />
                   </Form.Item>
@@ -72,14 +74,14 @@ const LoginPage = () => {
                     rules={[
                       {
                         required: true,
-                        message: "Please input your Password!",
+                        message: "请输入登录密码",
                       },
                     ]}
                   >
                     <Input
                       prefix={<LockOutlined className="site-form-item-icon" />}
                       type="password"
-                      placeholder="123456"
+                      placeholder="请输入密码"
                       autoComplete="off"
                     />
                   </Form.Item>
@@ -88,7 +90,7 @@ const LoginPage = () => {
                       <Checkbox>记住登录状态</Checkbox>
                     </Form.Item>
 
-                    <span className="login-form-forgot">演示环境账号已初始化</span>
+                    <span className="login-form-forgot">演示账号已预置，可直接登录</span>
                   </Form.Item>
 
                   <Form.Item>
@@ -100,7 +102,7 @@ const LoginPage = () => {
                     >
                       登录系统
                     </Button>
-                    演示账号：admin@demo.com / 123456
+                    <div style={{ color: "#666" }}>演示账号：admin@demo.com / 123456</div>
                   </Form.Item>
                 </Form>
               </div>
@@ -109,7 +111,7 @@ const LoginPage = () => {
         </Row>
 
         <Footer style={{ textAlign: "center" }}>
-          StudyHub 智能学习任务管理系统作业版
+          StudyHub 智能学习任务管理系统
         </Footer>
       </Layout>
     </>

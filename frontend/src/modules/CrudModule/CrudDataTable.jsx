@@ -48,19 +48,19 @@ function DropDownRowMenu({ row }) {
     {
       key: `show-${row._id}`,
       icon: <EyeOutlined />,
-      label: "Show",
+      label: "查看",
       onClick: Show,
     },
     {
       key: `edit-${row._id}`,
       icon: <EditOutlined />,
-      label: "Edit",
+      label: "编辑",
       onClick: Edit,
     },
     {
       key: `delete-${row._id}`,
       icon: <DeleteOutlined />,
-      label: "Delete",
+      label: "删除",
       onClick: Delete,
     },
   ];

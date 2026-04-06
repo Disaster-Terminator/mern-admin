@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
   DashboardOutlined,
@@ -16,6 +16,7 @@ const { Sider } = Layout;
 
 function Navigation() {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
 
   const onCollapse = () => {
     setCollapsed(!collapsed);
@@ -59,6 +60,18 @@ function Navigation() {
     },
   ];
 
+  const selectedKeyByPath = {
+    "/": "1",
+    "/course": "2",
+    "/task": "3",
+    "/note": "4",
+    "/review-plan": "5",
+    "/statistics": "6",
+    "/ai-assistant": "7",
+  };
+
+  const selectedKey = selectedKeyByPath[location.pathname] || "1";
+
   return (
     <>
       <Sider
@@ -69,10 +82,10 @@ function Navigation() {
           zIndex: 1000,
         }}
       >
-        <div className="logo">{collapsed ? "SH" : "StudyHub 01518"}</div>
+        <div className="logo">{collapsed ? "SH" : "StudyHub"}</div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[selectedKey]}
           mode="inline"
           items={menuItems}
         />

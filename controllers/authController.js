@@ -63,7 +63,7 @@ exports.login = async (req, res) => {
 
     // validate
     if (!email || !password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res.status(400).json({ msg: "邮箱和密码不能为空。" });
 
     const admin = await Admin.findOne({ email: email });
     // console.log(admin);
@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "No account with this email has been registered.",
+        message: "该邮箱未注册管理员账号。",
       });
 
     const isMatch = await bcrypt.compare(password, admin.password);
@@ -79,7 +79,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({
         success: false,
         result: null,
-        message: "Invalid credentials.",
+        message: "邮箱或密码错误。",
       });
 
     const token = jwt.sign(
@@ -108,7 +108,7 @@ exports.login = async (req, res) => {
           isLoggedIn: result.isLoggedIn,
         },
       },
-      message: "Successfully login admin",
+      message: "登录成功",
     });
   } catch (err) {
     // res.status(500).json({ success: false, result:null, message: err.message });
@@ -125,7 +125,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "No authentication token, authorization denied.",
+        message: "缺少认证令牌，请重新登录。",
         jwtExpired: true,
       });
 
@@ -134,7 +134,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "Token verification failed, authorization denied.",
+        message: "令牌校验失败，请重新登录。",
         jwtExpired: true,
       });
 
@@ -143,7 +143,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "Admin doens't Exist, authorization denied.",
+        message: "管理员账号不存在，请重新登录。",
         jwtExpired: true,
       });
 
@@ -151,7 +151,7 @@ exports.isValidToken = async (req, res, next) => {
       return res.status(401).json({
         success: false,
         result: null,
-        message: "Admin is already logout try to login, authorization denied.",
+        message: "当前账号已退出登录，请重新登录。",
         jwtExpired: true,
       });
     else {

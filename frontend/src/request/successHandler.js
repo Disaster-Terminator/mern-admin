@@ -23,7 +23,7 @@ const successHandler = (response, typeNotification = {}) => {
       duration: 20,
     });
     notification.error({
-      message: `Request error ${status}`,
+      message: `请求失败 ${status}`,
       description: errorText,
     });
   } else {

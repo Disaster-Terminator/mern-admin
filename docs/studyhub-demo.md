@@ -2,6 +2,19 @@
 
 > 当前仓库无现成 E2E 用例，本流程用于浏览器自动化录制、手动演示、截图与报告素材采集。
 
+## 截图输出约定
+
+- 输出目录：`docs/screenshots`
+- 固定命名：
+  - `fig01-login.png`
+  - `fig02-dashboard.png`
+  - `fig03-course.png`
+  - `fig04-task.png`
+  - `fig05-note.png`
+  - `fig06-review-plan.png`
+  - `fig07-statistics.png`
+  - `fig08-ai-assistant.png`
+
 ## 0. 启动服务
 
 1. 后端：`npm start`

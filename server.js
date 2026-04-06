@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { resolveDatabaseConfig, maskMongoUri } = require("./config/database");
 
 // Make sure we are running node 10.0+
 const [major, minor] = process.versions.node.split(".").map(parseFloat);
@@ -12,18 +13,26 @@ if (major < 10 || (major === 10 && minor <= 0)) {
 // import environmental variables from our variables.env file
 require("dotenv").config({ path: ".variables.env" });
 
+const databaseConfig = resolveDatabaseConfig();
+process.env.DATABASE = databaseConfig.mongoUri;
+
 // Connect to our Database and handle any bad connections
 // mongoose.connect(process.env.DATABASE);
 
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect(databaseConfig.mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
 });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on("error", (err) => {
   console.error(`🚫 Error → : ${err.message}`);
+});
+mongoose.connection.once("open", () => {
+  console.log(
+    `[DB] Connected (${databaseConfig.source}) → ${maskMongoUri(
+      databaseConfig.mongoUri
+    )}`
+  );
 });
 
 const glob = require("glob");

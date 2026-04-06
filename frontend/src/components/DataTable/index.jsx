@@ -30,23 +30,30 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
 
   const dispatch = useDispatch();
 
-  const handelDataTableLoad = useCallback((pagination) => {
-    dispatch(crud.list(entity, pagination.current));
-  }, []);
+  const handleDataTableLoad = useCallback(
+    (nextPagination) => {
+      const page = (nextPagination && nextPagination.current) || 1;
+      dispatch(crud.list(entity, page));
+    },
+    [dispatch, entity]
+  );
+
+  const handleRefresh = () => {
+    dispatch(crud.list(entity, 1));
+  };
 
   useEffect(() => {
     dispatch(crud.list(entity));
-  }, []);
+  }, [dispatch, entity]);
 
   return (
     <>
       <PageHeader
-        onBack={() => window.history.back()}
         title={dataTableTitle}
         ghost={false}
         extra={[
-          <Button onClick={handelDataTableLoad} key={`${uniqueId()}`}>
-            Refresh
+          <Button onClick={handleRefresh} key={`${uniqueId()}`}>
+            刷新
           </Button>,
           <AddNewItem key={`${uniqueId()}`} config={config} />,
         ]}
@@ -60,7 +67,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
         dataSource={items}
         pagination={pagination}
         loading={listIsLoading}
-        onChange={handelDataTableLoad}
+        onChange={handleDataTableLoad}
       />
     </>
   );

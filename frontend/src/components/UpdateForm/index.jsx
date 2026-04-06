@@ -72,7 +72,7 @@ export default function UpdateForm({ config, formElements }) {
           {formElements}
           <Form.Item>
             <Button type="primary" htmlType="submit">
-              Submit
+              保存修改
             </Button>
           </Form.Item>
         </Form>

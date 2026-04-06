@@ -25,16 +25,29 @@ export default function SearchItem({ config }) {
   const { result, isLoading, isSuccess } = useSelector(selectSearchedItems);
 
   const isTyping = useRef(false);
+  const delayTimer = useRef(null);
 
-  let delayTimer = null;
   useEffect(() => {
-    isLoading && setOptions([{ label: "... Searching" }]);
+    if (isLoading) {
+      setOptions([{ label: "搜索中...", value: "__loading" }]);
+    }
   }, [isLoading]);
+
+  useEffect(() => {
+    return () => {
+      if (delayTimer.current) {
+        clearTimeout(delayTimer.current);
+      }
+    };
+  }, []);
+
   const onSearch = (searchText) => {
     isTyping.current = true;
 
-    clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    if (delayTimer.current) {
+      clearTimeout(delayTimer.current);
+    }
+    delayTimer.current = setTimeout(function () {
       if (isTyping.current && searchText !== "") {
         dispatch(
           crud.search(entity, source, {
@@ -69,7 +82,7 @@ export default function SearchItem({ config }) {
   useEffect(() => {
     let optionResults = [];
 
-    result.map((item) => {
+    (result || []).forEach((item) => {
       const labels = displayLabels.map((x) => item[x]).join(" ");
       optionResults.push({ label: labels, value: item[outputValue] });
     });
@@ -87,9 +100,9 @@ export default function SearchItem({ config }) {
       onSelect={onSelect}
       onSearch={onSearch}
       onChange={onChange}
-      notFoundContent={!isSuccess ? <Empty /> : ""}
+      notFoundContent={!isSuccess ? <Empty description="暂无匹配结果" /> : ""}
       allowClear={true}
-      placeholder="Your Search here"
+      placeholder="请输入关键词搜索"
     >
       <Input suffix={<SearchOutlined />} />
     </AutoComplete>

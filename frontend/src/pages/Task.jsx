@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Tag } from "antd";
+import { Switch, Tag, message } from "antd";
 import { useDispatch } from "react-redux";
 
 import CrudModule from "@/modules/CrudModule";
@@ -10,7 +10,7 @@ import { crud } from "@/redux/crud/actions";
 function StatusTag({ status }) {
   return (
     <Tag color={status === "completed" ? "green" : "orange"}>
-      {status === "completed" ? "已完成" : "进行中"}
+      {status === "completed" ? "已完成" : "待办"}
     </Tag>
   );
 }
@@ -22,8 +22,12 @@ function TaskStatusSwitch({ row }) {
 
   const handleToggle = async () => {
     setLoading(true);
-    await request.patch(`task/toggle-status/${row._id}`, {});
-    dispatch(crud.list("task"));
+    const data = await request.patch(`task/toggle-status/${row._id}`, {});
+    if (data && data.success) {
+      dispatch(crud.list("task"));
+    } else {
+      message.error((data && data.message) || "任务状态切换失败，请稍后重试");
+    }
     setLoading(false);
   };
 
@@ -46,7 +50,7 @@ function Task() {
     outputValue: "_id",
   };
 
-  const panelTitle = "学习任务管理";
+  const panelTitle = "学习任务";
   const dataTableTitle = "任务列表";
   const entityDisplayLabels = ["title"];
 
@@ -72,7 +76,12 @@ function Task() {
           medium: "gold",
           low: "blue",
         };
-        return <Tag color={colorMap[priority] || "default"}>{priority}</Tag>;
+        const labelMap = {
+          high: "高",
+          medium: "中",
+          low: "低",
+        };
+        return <Tag color={colorMap[priority] || "default"}>{labelMap[priority] || priority}</Tag>;
       },
     },
     {
@@ -108,7 +117,12 @@ function Task() {
           medium: "gold",
           low: "blue",
         };
-        return <Tag color={colorMap[priority] || "default"}>{priority}</Tag>;
+        const labelMap = {
+          high: "高",
+          medium: "中",
+          low: "低",
+        };
+        return <Tag color={colorMap[priority] || "default"}>{labelMap[priority] || priority}</Tag>;
       },
     },
     {

@@ -1,6 +1,6 @@
 // export { default as AuthRouter } from "./AuthRouter";
 // export { default as AppRouter } from "./AppRouter";
-import React, { useEffect } from "react";
+import React from "react";
 
 import AuthRouter from "./AuthRouter";
 import AppRouter from "./AppRouter";
@@ -13,10 +13,6 @@ import { selectAuth } from "@/redux/auth/selectors";
 
 export default function Router() {
   const { isLoggedIn } = useSelector(selectAuth);
-
-  useEffect(() => {
-    console.log("isLoggedIn : ", isLoggedIn);
-  }, [isLoggedIn]);
 
   if (isLoggedIn === false)
     return (

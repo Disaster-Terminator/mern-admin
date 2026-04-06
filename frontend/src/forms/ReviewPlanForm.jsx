@@ -35,7 +35,7 @@ export default function ReviewPlanForm() {
       </Form.Item>
       <Form.Item label="状态" name="status" initialValue="pending">
         <Select>
-          <Select.Option value="pending">未完成</Select.Option>
+          <Select.Option value="pending">待办</Select.Option>
           <Select.Option value="completed">已完成</Select.Option>
         </Select>
       </Form.Item>
