@@ -5,7 +5,7 @@ const { Footer } = Layout;
 
 const FooterContent = () => (
   <Footer style={{ textAlign: "center" }}>
-    Ant Design ©2018 Created by Ant UED
+    StudyHub 智能学习任务管理系统
   </Footer>
 );
 

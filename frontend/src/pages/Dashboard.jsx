@@ -56,8 +56,8 @@ export default function Dashboard() {
         <Alert
           showIcon
           type="warning"
-          message="暂未获取到概览数据"
-          description="请确认后端服务已启动，并已准备课程、任务、笔记和复习计划数据。"
+          message="暂无概览数据"
+          description="请先完成数据初始化，或稍后点击“刷新数据”重试。"
           style={{ marginBottom: 16 }}
         />
       ) : null}
@@ -118,7 +118,7 @@ export default function Dashboard() {
                 ]}
               />
             ) : (
-              <Empty description="暂无任务分布数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              <Empty description="暂无课程任务分布数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
             )}
           </Card>
         </Col>

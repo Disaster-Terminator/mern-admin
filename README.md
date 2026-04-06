@@ -1,110 +1,44 @@
-## StudyHub 当前版本（补交演示）
+# StudyHub 智能学习任务管理系统
 
-本仓库已打磨为 StudyHub 智能学习任务管理系统版本，默认数据库链路为 MongoDB Atlas。
+StudyHub 是一个面向学习场景的课程任务管理系统，覆盖课程管理、学习任务、学习笔记、复习计划、数据统计和 AI 学习助手。
 
-### 快速开始
+默认数据库主链路为 MongoDB Atlas。
 
-1. 复制环境模板：
- - 将 `.variables.env.tmp` 复制为 `.variables.env`
-2. 配置 Atlas：
- - 在 `.variables.env` 中设置 `ATLAS_DATABASE`（或兼容字段 `DATABASE`）
-3. 初始化管理员：
- - `npm run setup`
-4. 注入演示数据：
- - `npm run seed:studyhub-demo`
-5. 启动后端：
- - `npm start`
-6. 启动前端：
- - `cd frontend && npm start`
-7. 主链路验证：
- - `npm run verify:studyhub`
+## 技术栈
 
-补交说明文档见：`docs/submission-guide.md`
+- 后端：Node.js、Express、Mongoose
+- 前端：React 17、Ant Design 4、Redux
+- 数据库：MongoDB Atlas（默认）
+- AI：OpenAI Chat Completions API（可选）
 
-## App Built on top of this Starter project [IDURAR ERP/CRM](https://github.com/idurar/erp-crm)
+## 快速开始
 
-IDURAR is Open Source ERP/CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
-GitHub Repository : [https://github.com/idurar/idurar-erp-crm](https://github.com/idurar/idurar-erp-crm)
-<br/>
+1. 安装依赖
+   - 根目录执行：`npm install`
+   - 前端目录执行：`cd frontend && npm install`
+2. 准备环境文件
+   - 将 `.variables.env.tmp` 复制为 `.variables.env`
+3. 配置数据库
+   - 在 `.variables.env` 中设置 `ATLAS_DATABASE`
+   - 兼容字段 `DATABASE` 仍可使用，但默认优先读取 `ATLAS_DATABASE`
+4. 初始化管理员
+   - 根目录执行：`npm run setup`
+5. 准备样例数据
+   - 根目录执行：`npm run seed:studyhub-demo`
+6. 启动服务
+   - 后端：`npm start`
+   - 前端：`cd frontend && npm start`
 
-**⭐️ Demo Open Source Version** : [https://opensource.idurarapp.com](https://opensource.idurarapp.com)
-<br/>
-**🚀 Cloud Entreprise Version** : [https://www.idurarapp.com](https://www.idurarapp.com)
-<br/>
+## 验证命令
 
-#
+- 后端主链路校验：`npm run verify:studyhub`
+- 前端生产构建：`cd frontend && npm run build`
 
-[![
-IDURAR is Open Source ERP/CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js )](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ja242ld9m9z1c6ia7lu5.png)](https://github.com/idurar/idurar-erp-crm)
+## AI 助手说明
 
-# Starter Mern Antd Admin App , MERN Admin dashboard ,Antd Admin Template free
+- 未配置 `OPENAI_API_KEY`：页面显示友好提示，流程可继续，调用日志仍会写入 `ai_logs`
+- 已配置 `OPENAI_API_KEY`：调用真实模型返回学习建议
 
-```
-Don't forget please to ⭐ this repo if you like this Starter Antd Admin!
-```
+## 文档
 
-## Our Sponsors
-
-[![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=4ead8370b905&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
-
-![starter-antd-admin-crud-auth-mern-crud-auth](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/opp4yj177dizyaosah0o.png)
-
-## Starter Antd Admin (Crud & auth) Mern App (Express.js / React / Redux / MongoDB)
-
-Starter Crm App based on mern stack (Express.js / MongoDb / React / Redux / AntD) with generic crud and auth , admin management .
-
-**Live App Demo** : [https://www.idurarapp.com](https://www.idurarapp.com)
-
-## Setup backend
-
-1) just create MongoDB Atlas accout database url
-2) change this file name .variables.env.tmp to  .variables.env
-3) open  .variables.env and paste your MongoDB url here :  DATABASE=your-mongodb-url
-4) npm install
-5) npm setup
-
-## Setup frontend
-
-1) cd frontend
-2) npm install
-3) change api config to loaclhost in this : src/frontend/src/config/serverApiConfig.js
-
-## start server
-
-1) npm start
-
-## start react app
-
-1) cd frontend
-2) npm start
-
-```
-
-## App Features :
-
-### Backend :
-
-* The backend is built with node.js , [express.js Framework](https://expressjs.com/) ,and MongoDb Database
-* Generic Crud Api (Create / Read / Update / Delete)
-* Admin (User) Management Api
-* Auth by Jwt json web token
-
-### Frontend :
-
-* The Frontend is built with React.js , [Ant Design (Antd)](https://ant.design/), and Redux , Redux-thunk.
-* Generic Crud Component (Module) (Create / Read / Update / Delete)
-* Admin (User) Management Module
-* Auth Component Login / Logout
-* Private Route and Public Route
-* Not Found Page
-* Beautiful UI Dashboard
-
-#
-```
-
-<br/>
-
-**⭐️ Demo Open Source Version** : [https://opensource.idurarapp.com](https://opensource.idurarapp.com)
-<br/>
-**🚀 Cloud Entreprise Version** : [https://www.idurarapp.com](https://www.idurarapp.com)
-<br/>
+- 运行与补交流程：`docs/submission-guide.md`

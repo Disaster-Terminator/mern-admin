@@ -24,7 +24,7 @@ exports.catchErrors = (fn) => {
 exports.notFound = (req, res, next) => {
   res.status(404).json({
     success: false,
-    message: "Api url doesn't exist ",
+    message: "请求的接口不存在",
   });
 };
 
@@ -46,7 +46,7 @@ exports.developmentErrors = (err, req, res, next) => {
 
   res.status(500).json({
     success: false,
-    message: "Oops ! Error in Server",
+    message: "服务器错误，请稍后重试",
   });
 };
 
@@ -58,6 +58,6 @@ exports.developmentErrors = (err, req, res, next) => {
 exports.productionErrors = (err, req, res, next) => {
   res.status(500).json({
     success: false,
-    message: "Oops ! Error in Server",
+    message: "服务器错误，请稍后重试",
   });
 };

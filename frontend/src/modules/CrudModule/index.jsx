@@ -28,6 +28,7 @@ function SidePanelTopContent({ config, formElements }) {
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
   const { collapsedBox } = crudContextAction;
+  const { panelSubTitle } = config;
 
   const addNewItem = () => {
     collapsedBox.close();
@@ -39,17 +40,21 @@ function FixHeaderPanel({ config }) {
           <h1 style={{ fontSize: 20, marginBottom: 20 }}>
             {config.panelTitle}
           </h1>
+          {panelSubTitle ? (
+            <p style={{ marginTop: -10, marginBottom: 16, color: "#666" }}>{panelSubTitle}</p>
+          ) : null}
         </Col>
       </Row>
-      <Row gutter={8}>
-        <Col className="gutter-row" span={21}>
+      <Row gutter={[8, 8]}>
+        <Col className="gutter-row" xs={24} sm={20}>
           <SearchItem config={config} />
         </Col>
-        <Col className="gutter-row" span={3}>
+        <Col className="gutter-row" xs={24} sm={4}>
           <Button
             onClick={addNewItem}
             block={true}
             icon={<PlusOutlined />}
+            title="新增"
           ></Button>
         </Col>
       </Row>

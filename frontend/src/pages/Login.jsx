@@ -36,7 +36,7 @@ const LoginPage = () => {
             >
               <h1 style={{ marginBottom: 8 }}>StudyHub</h1>
               <p style={{ color: "#666", marginBottom: 0 }}>
-                智能学习任务管理系统登录
+                请使用管理员账号登录 StudyHub
               </p>
               {/* {error && (
                 <ErrorNotice
@@ -65,7 +65,7 @@ const LoginPage = () => {
                   >
                     <Input
                       prefix={<UserOutlined className="site-form-item-icon" />}
-                      placeholder="请输入邮箱，例如：admin@demo.com"
+                      placeholder="请输入邮箱"
                       autoComplete="off"
                     />
                   </Form.Item>
@@ -89,8 +89,6 @@ const LoginPage = () => {
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                       <Checkbox>记住登录状态</Checkbox>
                     </Form.Item>
-
-                    <span className="login-form-forgot">演示账号已预置，可直接登录</span>
                   </Form.Item>
 
                   <Form.Item>
@@ -102,7 +100,6 @@ const LoginPage = () => {
                     >
                       登录系统
                     </Button>
-                    <div style={{ color: "#666" }}>演示账号：admin@demo.com / 123456</div>
                   </Form.Item>
                 </Form>
               </div>

@@ -279,7 +279,7 @@ const aiLogs = [
   {
     course: "人工智能导论",
     taskDescription: "希望把课堂笔记整理成复习提纲",
-    noteContent: "未配置 OpenAI key 的备用演示记录",
+    noteContent: "未配置 OpenAI key 的备用记录",
     actionType: "笔记摘要",
     requestSummary: "课程：人工智能导论 | 模式：笔记摘要",
     responseText: "",
@@ -322,12 +322,12 @@ const run = async () => {
       AiLog.insertMany(aiLogs),
     ]);
 
-    console.log("[seed] StudyHub demo data prepared successfully.");
+    console.log("[seed] StudyHub sample data prepared successfully.");
     console.log(
       `[seed] courses=${courses.length}, tasks=${tasks.length}, notes=${notes.length}, reviewPlans=${reviewPlans.length}, aiLogs=${aiLogs.length}`
     );
   } catch (error) {
-    console.error("[seed] Failed to seed demo data:", error.message);
+    console.error("[seed] Failed to seed sample data:", error.message);
     process.exitCode = 1;
   } finally {
     await mongoose.connection.close();

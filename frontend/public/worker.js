@@ -1,12 +1,12 @@
-let CACHE_NAME = "your-app-name";
-let urlsToCache = ["/", "/completed"];
+let CACHE_NAME = "studyhub-static-cache-v1";
+let urlsToCache = ["/"];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log("Opened cache");
+      console.log("StudyHub cache opened");
       return cache.addAll(urlsToCache);
     })
   );
@@ -27,7 +27,7 @@ self.addEventListener("fetch", (event) => {
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-  let cacheWhitelist = ["your-app-name"];
+  let cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(

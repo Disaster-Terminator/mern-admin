@@ -13,7 +13,12 @@ import { Empty } from "antd";
 export default function SearchItem({ config }) {
   let { entity, searchConfig } = config;
 
-  const { displayLabels, searchFields, outputValue = "_id" } = searchConfig;
+  const {
+    displayLabels,
+    searchFields,
+    outputValue = "_id",
+    placeholder = "请输入关键词搜索",
+  } = searchConfig;
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -101,10 +106,8 @@ export default function SearchItem({ config }) {
       onSearch={onSearch}
       onChange={onChange}
       notFoundContent={!isSuccess ? <Empty description="暂无匹配结果" /> : ""}
-      allowClear={true}
-      placeholder="请输入关键词搜索"
     >
-      <Input suffix={<SearchOutlined />} />
+      <Input placeholder={placeholder} suffix={<SearchOutlined />} />
     </AutoComplete>
   );
 }

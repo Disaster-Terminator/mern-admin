@@ -1,5 +1,5 @@
 {
-  "name": "starter-crud-auth-api-express",
+  "name": "studyhub-admin-atlas",
   "version": "1.0.0",
   "engines": {
     "node": "14.x"
@@ -29,17 +29,22 @@
   "devDependencies": {
     "nodemon": "^1.19.2"
   },
-  "description": "Just you wait folks!",
+  "description": "StudyHub intelligent learning task management system (MERN + MongoDB Atlas).",
   "main": "app.js",
-  "keywords": [],
-  "author": "Salah Eddine Lalami",
+  "keywords": [
+    "studyhub",
+    "mern",
+    "mongodb-atlas",
+    "learning-management"
+  ],
+  "author": "StudyHub Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idurar/starter-antd-admin-crud-auth-mern.git"
+    "url": "git+https://github.com/Disaster-Terminator/mern-admin.git"
   },
   "bugs": {
-    "url": "https://github.com/idurar/starter-antd-admin-crud-auth-mern/issues"
+    "url": "https://github.com/Disaster-Terminator/mern-admin/issues"
   },
-  "homepage": "https://github.com/idurar/starter-antd-admin-crud-auth-mern#readme"
+  "homepage": "https://github.com/Disaster-Terminator/mern-admin#readme"
 }

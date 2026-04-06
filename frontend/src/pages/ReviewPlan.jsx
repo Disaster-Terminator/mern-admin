@@ -51,9 +51,11 @@ function ReviewPlan() {
     displayLabels: ["course", "target", "status"],
     searchFields: "course,target,status",
     outputValue: "_id",
+    placeholder: "按课程、目标或状态搜索",
   };
 
   const panelTitle = "复习计划";
+  const panelSubTitle = "规划复习目标与时间节点，跟踪执行状态";
   const dataTableTitle = "复习计划列表";
   const entityDisplayLabels = ["course", "target"];
 
@@ -100,7 +102,7 @@ function ReviewPlan() {
       render: (status) => <ReviewStatusTag status={status} />,
     },
     {
-      title: "快速切换",
+      title: "状态切换",
       render: (row) => <ReviewStatusSwitch row={row} />,
     },
   ];
@@ -114,6 +116,7 @@ function ReviewPlan() {
   const config = {
     entity,
     panelTitle,
+    panelSubTitle,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,

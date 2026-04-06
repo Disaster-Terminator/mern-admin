@@ -9,9 +9,11 @@ function Course() {
     displayLabels: ["name", "teacher", "location"],
     searchFields: "name,teacher,location",
     outputValue: "_id",
+    placeholder: "按课程名称、老师或地点搜索",
   };
 
   const panelTitle = "课程管理";
+  const panelSubTitle = "统一维护课程信息与课堂安排";
   const dataTableTitle = "课程列表";
   const entityDisplayLabels = ["name"];
 
@@ -66,6 +68,7 @@ function Course() {
   const config = {
     entity,
     panelTitle,
+    panelSubTitle,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,

@@ -67,6 +67,7 @@ export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
         dataSource={items}
         pagination={pagination}
         loading={listIsLoading}
+        locale={{ emptyText: "暂无数据" }}
         onChange={handleDataTableLoad}
       />
     </>

@@ -34,7 +34,7 @@ export default function NoteForm() {
         <TextArea rows={6} />
       </Form.Item>
       <Form.Item label="标签" name="tags">
-        <Input placeholder="多个标签用英文逗号分隔" />
+        <Input placeholder="多个标签请用逗号分隔" />
       </Form.Item>
     </>
   );

@@ -22,7 +22,7 @@ const statusLabelMap = {
   completed: "已完成",
 };
 
-const normalizeStatus = (value) => statusLabelMap[value] || value || "未定义";
+const normalizeStatus = (value) => statusLabelMap[value] || value || "其他";
 
 export default function Statistics() {
   const { onFetch, result, isLoading, isSuccess } = useOnFetch();
@@ -53,11 +53,11 @@ export default function Statistics() {
         <Col>
           <h1 style={{ marginBottom: 0 }}>StudyHub 数据统计</h1>
           <p style={{ marginBottom: 0, color: "#666" }}>
-            基于真实数据库聚合结果的学习数据分析看板
+            基于课程、任务、笔记与复习计划的学习数据分析
           </p>
         </Col>
         <Col>
-          <Button icon={<ReloadOutlined />} onClick={loadStatistics}>
+          <Button icon={<ReloadOutlined />} onClick={loadStatistics} loading={isLoading}>
             刷新统计
           </Button>
         </Col>
@@ -70,7 +70,7 @@ export default function Statistics() {
       ) : null}
 
       {!isLoading && !isSuccess ? (
-        <Alert type="warning" showIcon message="暂未获取到统计数据" />
+        <Alert type="warning" showIcon message="暂无统计数据，请稍后重试" />
       ) : null}
 
       {isSuccess ? (
@@ -129,7 +129,7 @@ export default function Statistics() {
                     ]}
                   />
                 ) : (
-                  <Empty description="暂无任务数据" />
+                  <Empty description="暂无数据" />
                 )}
               </Card>
             </Col>
@@ -146,7 +146,7 @@ export default function Statistics() {
                     ]}
                   />
                 ) : (
-                  <Empty description="暂无笔记数据" />
+                  <Empty description="暂无数据" />
                 )}
               </Card>
             </Col>
@@ -172,7 +172,7 @@ export default function Statistics() {
                     ]}
                   />
                 ) : (
-                  <Empty description="暂无任务状态数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                  <Empty description="暂无数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
                 )}
               </Card>
             </Col>
@@ -193,7 +193,7 @@ export default function Statistics() {
                     ]}
                   />
                 ) : (
-                  <Empty description="暂无复习计划状态数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                  <Empty description="暂无数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
                 )}
               </Card>
             </Col>

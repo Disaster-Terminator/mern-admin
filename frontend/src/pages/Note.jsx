@@ -9,9 +9,11 @@ function Note() {
     displayLabels: ["title", "course", "content"],
     searchFields: "title,course,content",
     outputValue: "_id",
+    placeholder: "按标题、课程或内容关键词搜索",
   };
 
   const panelTitle = "学习笔记";
+  const panelSubTitle = "沉淀课堂要点与复习标签，便于快速检索";
   const dataTableTitle = "笔记列表";
   const entityDisplayLabels = ["title"];
 
@@ -66,6 +68,7 @@ function Note() {
   const config = {
     entity,
     panelTitle,
+    panelSubTitle,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,

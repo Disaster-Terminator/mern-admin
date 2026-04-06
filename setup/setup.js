@@ -41,16 +41,30 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 async function createAdmin() {
   try {
     const Admin = require("../models/Admin");
+    const adminEmail = process.env.DEMO_ADMIN_EMAIL || "admin@demo.com";
+    const adminName = process.env.DEMO_ADMIN_NAME || "admin";
+    const adminSurname = process.env.DEMO_ADMIN_SURNAME || "demo";
+    const adminPassword = process.env.DEMO_ADMIN_PASSWORD || "123456";
+
+    const existingAdmin = await Admin.findOne({ email: adminEmail }).select("_id");
+    if (existingAdmin) {
+      console.log(
+        `👍 Admin already exists: ${adminEmail} (credentials are kept unchanged)`
+      );
+      process.exit();
+      return;
+    }
+
     var newAdmin = new Admin();
-    const passwordHash = newAdmin.generateHash("123456");
+    const passwordHash = newAdmin.generateHash(adminPassword);
 
     await new Admin({
-      email: "admin@demo.com",
+      email: adminEmail,
       password: passwordHash,
-      name: "admin",
-      surname: "demo",
+      name: adminName,
+      surname: adminSurname,
     }).save();
-    console.log("👍👍👍👍👍👍👍👍 Admin created : Done!");
+    console.log(`👍 Admin created: ${adminEmail}`);
     process.exit();
   } catch (e) {
     console.log("\n👎👎👎👎👎👎👎👎 Error! The Error info is below");

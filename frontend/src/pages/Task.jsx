@@ -48,9 +48,11 @@ function Task() {
     displayLabels: ["title", "course", "status"],
     searchFields: "title,course,status",
     outputValue: "_id",
+    placeholder: "按任务标题、课程或状态搜索",
   };
 
   const panelTitle = "学习任务";
+  const panelSubTitle = "集中跟踪学习任务优先级与完成进度";
   const dataTableTitle = "任务列表";
   const entityDisplayLabels = ["title"];
 
@@ -131,7 +133,7 @@ function Task() {
       render: (status) => <StatusTag status={status} />,
     },
     {
-      title: "快速切换",
+      title: "状态切换",
       render: (row) => <TaskStatusSwitch row={row} />,
     },
   ];
@@ -145,6 +147,7 @@ function Task() {
   const config = {
     entity,
     panelTitle,
+    panelSubTitle,
     dataTableTitle,
     ENTITY_NAME,
     CREATE_ENTITY,
