@@ -12,21 +12,15 @@ const Course = lazy(() =>
   import(/*webpackChunkName:'CoursePage'*/ "@/pages/Course")
 );
 const Task = lazy(() => import(/*webpackChunkName:'TaskPage'*/ "@/pages/Task"));
-const Admin = lazy(() =>
-  import(/*webpackChunkName:'AdminPage'*/ "@/pages/Admin")
+const Note = lazy(() => import(/*webpackChunkName:'NotePage'*/ "@/pages/Note"));
+const ReviewPlan = lazy(() =>
+  import(/*webpackChunkName:'ReviewPlanPage'*/ "@/pages/ReviewPlan")
 );
-
-const Customer = lazy(() =>
-  import(/*webpackChunkName:'CustomerPage'*/ "@/pages/Customer")
+const Statistics = lazy(() =>
+  import(/*webpackChunkName:'StatisticsPage'*/ "@/pages/Statistics")
 );
-
-const SelectCustomer = lazy(() =>
-  import(/*webpackChunkName:'SelectCustomerPage'*/ "@/pages/SelectCustomer")
-);
-
-const Lead = lazy(() => import(/*webpackChunkName:'LeadPage'*/ "@/pages/Lead"));
-const Product = lazy(() =>
-  import(/*webpackChunkName:'ProductPage'*/ "@/pages/Product")
+const AIAssistant = lazy(() =>
+  import(/*webpackChunkName:'AIAssistantPage'*/ "@/pages/AIAssistant")
 );
 
 const Logout = lazy(() =>
@@ -45,15 +39,10 @@ export default function AppRouter() {
           <PrivateRoute path="/" component={Dashboard} exact />
           <PrivateRoute component={Course} path="/course" exact />
           <PrivateRoute component={Task} path="/task" exact />
-          <PrivateRoute component={Customer} path="/customer" exact />
-          <PrivateRoute
-            component={SelectCustomer}
-            path="/selectcustomer"
-            exact
-          />
-          <PrivateRoute component={Lead} path="/lead" exact />
-          <PrivateRoute component={Product} path="/product" exact />
-          <PrivateRoute component={Admin} path="/admin" exact />
+          <PrivateRoute component={Note} path="/note" exact />
+          <PrivateRoute component={ReviewPlan} path="/review-plan" exact />
+          <PrivateRoute component={Statistics} path="/statistics" exact />
+          <PrivateRoute component={AIAssistant} path="/ai-assistant" exact />
 
           <PrivateRoute component={Logout} path="/logout" exact />
           <PublicRoute path="/login" render={() => <Redirect to="/" />} />

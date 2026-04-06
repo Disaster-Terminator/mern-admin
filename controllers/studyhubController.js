@@ -107,7 +107,7 @@ exports.aiAssistant = async (req, res) => {
       noteContent: payload.noteContent,
       actionType,
       requestSummary,
-      responseText: aiResult.output,
+      responseText: aiResult.output || aiResult.message,
       model: aiResult.model,
       configured: aiResult.configured,
     }).save();
@@ -133,7 +133,9 @@ exports.aiAssistant = async (req, res) => {
       errorMessage: error.message,
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
       configured: true,
-    }).save();
+    })
+      .save()
+      .catch(() => null);
 
     return res.status(500).json({
       success: false,

@@ -14,33 +14,22 @@ export default function HeaderContent() {
   const menu = (
     <Menu>
       <Menu.Item key={`${uniqueId()}`} onClick={() => dispatch(logout())}>
-        logout
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.taobao.com/"
-        >
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.tmall.com/"
-        >
-          3rd menu item
-        </a>
+        退出登录
       </Menu.Item>
     </Menu>
   );
   return (
     <Header
       className="site-layout-background"
-      style={{ padding: 0, background: "none" }}
+      style={{
+        padding: "0 24px",
+        background: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
     >
+      <h3 style={{ marginBottom: 0 }}>StudyHub 智能学习任务管理系统</h3>
       <Dropdown overlay={menu} placement="bottomRight" arrow>
         <Avatar icon={<UserOutlined />} />
       </Dropdown>
