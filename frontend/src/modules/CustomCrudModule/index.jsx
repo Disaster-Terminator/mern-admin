@@ -27,9 +27,10 @@ function SidePanelTopContent({ config, formElements }) {
 
 function FixHeaderPanel({ config }) {
   const { crudContextAction } = useCrudContext();
-  const { collapsedBox } = crudContextAction;
+  const { collapsedBox, panel } = crudContextAction;
 
   const addNewItem = () => {
+    panel.open();
     collapsedBox.close();
   };
   return (

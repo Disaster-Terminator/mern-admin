@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { Row, Col, Button } from "antd";
+import { Button, Space } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import CreateForm from "@/components/CreateForm";
@@ -28,33 +28,42 @@ function SidePanelTopContent({ config, formElements }) {
 }
 
 function FixHeaderPanel({ config }) {
+  const dispatch = useDispatch();
   const { crudContextAction } = useCrudContext();
-  const { collapsedBox } = crudContextAction;
+  const { collapsedBox, panel, readBox } = crudContextAction;
+  const { panelSubTitle, panelTitle, ADD_NEW_ENTITY, entity } = config;
 
   const addNewItem = () => {
+    panel.open();
     collapsedBox.close();
+    readBox.close();
   };
+
+  const refreshList = () => {
+    dispatch(crud.list(entity, 1));
+  };
+
   return (
-    <div className="box">
-      <Row gutter={12}>
-        <Col className="gutter-row" span={21}>
-          <h1 style={{ fontSize: 20, marginBottom: 20 }}>
-            {config.panelTitle}
-          </h1>
-        </Col>
-      </Row>
-      <Row gutter={8}>
-        <Col className="gutter-row" span={21}>
+    <div className="crudPageHeader">
+      <div className="crudPageHeading">
+        <div className="crudPageTitleGroup">
+          <h1 className="crudPageTitle">{panelTitle}</h1>
+          {panelSubTitle ? (
+            <p className="crudPageSubTitle">{panelSubTitle}</p>
+          ) : null}
+        </div>
+        <Space className="crudPageActions" size={10}>
+          <Button onClick={refreshList}>刷新列表</Button>
+          <Button type="primary" icon={<PlusOutlined />} onClick={addNewItem}>
+            {ADD_NEW_ENTITY}
+          </Button>
+        </Space>
+      </div>
+      <div className="crudPageToolbar">
+        <div className="crudPageSearch">
           <SearchItem config={config} />
-        </Col>
-        <Col className="gutter-row" span={3}>
-          <Button
-            onClick={addNewItem}
-            block={true}
-            icon={<PlusOutlined />}
-          ></Button>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 }
@@ -64,7 +73,7 @@ function AdminCrudModule({ config, createForm, updateForm }) {
 
   useLayoutEffect(() => {
     dispatch(crud.resetState());
-  }, []);
+  }, [dispatch]);
 
   return (
     <CrudLayout

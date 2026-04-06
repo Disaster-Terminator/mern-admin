@@ -17,28 +17,20 @@ export default function CrudLayout({
 }) {
   return (
     <DefaultLayout>
-      <Layout style={{ minHeight: "100vh" }}>
-        <SidePanel
-          config={config}
-          topContent={sidePanelTopContent}
-          bottomContent={sidePanelBottomContent}
-          fixHeaderPanel={fixHeaderPanel}
-        ></SidePanel>
-        <Layout className="site-layout">
-          <HeaderContent />
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: "30px 32px",
-              margin: "20px auto",
-              width: "100%",
-              maxWidth: "1100px",
-            }}
-          >
+      <Layout className="studyhubPageLayout">
+        <HeaderContent />
+        <Content className="studyhubPageContent">
+          <div className="studyhubPageContentInner">
+            {fixHeaderPanel}
             {children}
-          </Content>
-        </Layout>
+          </div>
+        </Content>
       </Layout>
+      <SidePanel
+        config={config}
+        topContent={sidePanelTopContent}
+        bottomContent={sidePanelBottomContent}
+      ></SidePanel>
     </DefaultLayout>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "antd";
+import { Menu } from "antd";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { crud } from "@/redux/crud/actions";
@@ -8,70 +8,50 @@ import { selectItemById } from "@/redux/crud/selectors";
 import { useCrudContext } from "@/context/crud";
 import DataTable from "@/components/DataTable";
 
-function AddNewItem({ config }) {
-  const { crudContextAction } = useCrudContext();
-  const { collapsedBox, panel } = crudContextAction;
-  const { ADD_NEW_ENTITY } = config;
-  const handelClick = () => {
-    panel.open();
-    collapsedBox.close();
-  };
-
-  return (
-    <Button onClick={handelClick} type="primary">
-      {ADD_NEW_ENTITY}
-    </Button>
-  );
-}
 function DropDownRowMenu({ row }) {
   const dispatch = useDispatch();
   const { crudContextAction } = useCrudContext();
   const { panel, collapsedBox, modal, readBox, editBox } = crudContextAction;
   const item = useSelector(selectItemById(row._id));
-  const Show = () => {
+
+  const showItem = () => {
     dispatch(crud.currentItem(item));
     panel.open();
     collapsedBox.open();
     readBox.open();
   };
-  function Edit() {
+
+  const editItem = () => {
     dispatch(crud.currentAction("update", item));
     editBox.open();
     panel.open();
     collapsedBox.open();
-  }
-  function Delete() {
+  };
+
+  const deleteItem = () => {
     dispatch(crud.currentAction("delete", item));
     modal.open();
-  }
-  return [
-    {
-      key: `show-${row._id}`,
-      icon: <EyeOutlined />,
-      label: "查看",
-      onClick: Show,
-    },
-    {
-      key: `edit-${row._id}`,
-      icon: <EditOutlined />,
-      label: "编辑",
-      onClick: Edit,
-    },
-    {
-      key: `delete-${row._id}`,
-      icon: <DeleteOutlined />,
-      label: "删除",
-      onClick: Delete,
-    },
-  ];
+  };
+
+  return (
+    <Menu style={{ minWidth: 120 }}>
+      <Menu.Item key={`show-${row._id}`} icon={<EyeOutlined />} onClick={showItem}>
+        查看
+      </Menu.Item>
+      <Menu.Item key={`edit-${row._id}`} icon={<EditOutlined />} onClick={editItem}>
+        编辑
+      </Menu.Item>
+      <Menu.Item
+        key={`delete-${row._id}`}
+        icon={<DeleteOutlined />}
+        onClick={deleteItem}
+      >
+        删除
+      </Menu.Item>
+    </Menu>
+  );
 }
 
 export default function CrudDataTable({ config }) {
-  return (
-    <DataTable
-      config={config}
-      DropDownRowMenu={DropDownRowMenu}
-      AddNewItem={AddNewItem}
-    />
-  );
+  return <DataTable config={config} DropDownRowMenu={DropDownRowMenu} />;
 }

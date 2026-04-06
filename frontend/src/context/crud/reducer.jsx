@@ -2,7 +2,7 @@ import * as actionTypes from "./types";
 
 export const initialState = {
   isModalOpen: false,
-  isPanelCollapsed: false,
+  isPanelCollapsed: true,
   isBoxCollapsed: false,
   isReadBoxOpen: true,
   isAdvancedBoxOpen: false,

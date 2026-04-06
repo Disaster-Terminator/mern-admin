@@ -10,6 +10,8 @@ import {
   CalendarOutlined,
   BarChartOutlined,
   RobotOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
@@ -19,7 +21,7 @@ function Navigation() {
   const location = useLocation();
 
   const onCollapse = () => {
-    setCollapsed(!collapsed);
+    setCollapsed((prev) => !prev);
   };
 
   const menuItems = [
@@ -70,27 +72,53 @@ function Navigation() {
     "/ai-assistant": "7",
   };
 
-  const selectedKey = selectedKeyByPath[location.pathname] || "1";
+  const matchedPath = Object.keys(selectedKeyByPath).find(
+    (path) => path !== "/" && location.pathname.startsWith(path)
+  );
+
+  const selectedKey =
+    (matchedPath && selectedKeyByPath[matchedPath]) ||
+    selectedKeyByPath[location.pathname] ||
+    "1";
 
   return (
-    <>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-        style={{
-          zIndex: 1000,
-        }}
-      >
-        <div className="logo">{collapsed ? "SH" : "StudyHub"}</div>
-        <Menu
-          theme="dark"
-          selectedKeys={[selectedKey]}
-          mode="inline"
-          items={menuItems}
-        />
-      </Sider>
-    </>
+    <Sider
+      className="studyhubSider"
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      width={248}
+      collapsedWidth={88}
+      onCollapse={onCollapse}
+    >
+      <div className="studyhubSiderBrand">
+        <div className="studyhubBrandMark">SH</div>
+        {!collapsed ? (
+          <div className="studyhubBrandText">
+            <strong>StudyHub</strong>
+            <span>智能学习管理</span>
+          </div>
+        ) : null}
+      </div>
+      <Menu
+        theme="dark"
+        selectedKeys={[selectedKey]}
+        mode="inline"
+        items={menuItems}
+        className="studyhubSiderMenu"
+      />
+      <div className="studyhubSiderFooter">
+        <button
+          type="button"
+          className="studyhubSiderTrigger"
+          onClick={onCollapse}
+          aria-label={collapsed ? "展开侧边导航" : "收起侧边导航"}
+        >
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          {!collapsed ? <span>收起导航</span> : null}
+        </button>
+      </div>
+    </Sider>
   );
 }
 export default Navigation;
