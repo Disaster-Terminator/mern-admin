@@ -8,6 +8,10 @@ import PageLoader from "@/components/PageLoader";
 const Dashboard = lazy(() =>
   import(/*webpackChunkName:'DashboardPage'*/ "@/pages/Dashboard")
 );
+const Course = lazy(() =>
+  import(/*webpackChunkName:'CoursePage'*/ "@/pages/Course")
+);
+const Task = lazy(() => import(/*webpackChunkName:'TaskPage'*/ "@/pages/Task"));
 const Admin = lazy(() =>
   import(/*webpackChunkName:'AdminPage'*/ "@/pages/Admin")
 );
@@ -39,6 +43,8 @@ export default function AppRouter() {
       <AnimatePresence exitBeforeEnter initial={false}>
         <Switch location={location} key={location.pathname}>
           <PrivateRoute path="/" component={Dashboard} exact />
+          <PrivateRoute component={Course} path="/course" exact />
+          <PrivateRoute component={Task} path="/task" exact />
           <PrivateRoute component={Customer} path="/customer" exact />
           <PrivateRoute
             component={SelectCustomer}

@@ -3,17 +3,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import {
-  SettingOutlined,
-  UserOutlined,
-  CustomerServiceOutlined,
-  FileTextOutlined,
-  FileSyncOutlined,
   DashboardOutlined,
-  TeamOutlined,
+  BookOutlined,
+  CheckSquareOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 function Navigation() {
   const [collapsed, setCollapsed] = useState(false);
@@ -31,34 +26,16 @@ function Navigation() {
           zIndex: 1000,
         }}
       >
-        <div className="logo" />
+        <div className="logo">{collapsed ? "SH" : "StudyHub 01518"}</div>
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1" icon={<DashboardOutlined />}>
-            <Link to="/" />
-            Home Page
+            <Link to="/">首页概览</Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<CustomerServiceOutlined />}>
-            <Link to="/customer">Customer</Link>
+          <Menu.Item key="2" icon={<BookOutlined />}>
+            <Link to="/course">课程管理</Link>
           </Menu.Item>
-          <Menu.Item key="24" icon={<UserOutlined />}>
-            <Link to="/selectcustomer">Custom Select Customer</Link>
-          </Menu.Item>
-          <Menu.Item key="21" icon={<FileTextOutlined />}>
-            <Link to="/lead" />
-            Lead
-          </Menu.Item>
-          <Menu.Item key="3" icon={<FileSyncOutlined />}>
-            <Link to="/product" />
-            Product
-          </Menu.Item>
-          <Menu.Item key="31" icon={<TeamOutlined />}>
-            <Link to="/admin" />
-            Admins Management
-          </Menu.Item>
-
-          <Menu.Item key="32" icon={<SettingOutlined />}>
-            <Link to="/settings" />
-            Settings
+          <Menu.Item key="3" icon={<CheckSquareOutlined />}>
+            <Link to="/task">学习任务</Link>
           </Menu.Item>
         </Menu>
       </Sider>

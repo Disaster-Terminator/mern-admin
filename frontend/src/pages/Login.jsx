@@ -35,7 +35,7 @@ const LoginPage = () => {
                 margin: "0 auto",
               }}
             >
-              <h1>Login</h1>
+              <h1>StudyHub 登录</h1>
               {/* {error && (
                 <ErrorNotice
                   message={error}
@@ -101,9 +101,9 @@ const LoginPage = () => {
                       className="login-form-button"
                       loading={isLoading}
                     >
-                      Log in
+                      登录系统
                     </Button>
-                    Or <a href="">register now!</a>
+                    测试账号可直接输入任意邮箱与密码
                   </Form.Item>
                 </Form>
               </div>
@@ -112,8 +112,7 @@ const LoginPage = () => {
         </Row>
 
         <Footer style={{ textAlign: "center" }}>
-          Open Source CRM based on AntD & React ©2020 Created by Salah Eddine
-          Lalami
+          StudyHub 智能学习任务管理系统作业版
         </Footer>
       </Layout>
     </>
