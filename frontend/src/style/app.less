@@ -6,9 +6,14 @@
 @page-bg-end: #edf2fb;
 @surface: #ffffff;
 @surface-border: #e6ebf4;
+@surface-soft: #f8fbff;
 @heading-color: #101828;
 @text-muted: #667085;
 @brand-blue: #1d4ed8;
+@brand-indigo: #1e40af;
+@brand-cyan: #0891b2;
+@success-green: #15803d;
+@warning-amber: #b45309;
 @nav-bg: #0f172a;
 @nav-hover: #1f2a44;
 
@@ -29,8 +34,8 @@ body {
 }
 
 .studyhubSider {
-  background: @nav-bg !important;
-  box-shadow: 6px 0 20px rgba(15, 23, 42, 0.18);
+  background: linear-gradient(180deg, #0b1120 0%, @nav-bg 56%, #101b38 100%) !important;
+  box-shadow: 12px 0 26px rgba(15, 23, 42, 0.24);
   z-index: 100;
 }
 
@@ -41,11 +46,12 @@ body {
 }
 
 .studyhubSiderBrand {
-  height: 76px;
-  margin: 14px 14px 8px;
+  min-height: 84px;
+  margin: 14px 14px 10px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(148, 163, 184, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.24);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -56,7 +62,7 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(140deg, #2563eb, #1d4ed8);
   color: #fff;
   font-weight: 800;
   display: inline-flex;
@@ -74,7 +80,7 @@ body {
 }
 
 .studyhubBrandText strong {
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.3px;
 }
 
@@ -83,37 +89,104 @@ body {
   color: rgba(255, 255, 255, 0.75);
 }
 
+.studyhubSiderSectionLabel {
+  margin: 2px 18px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(203, 213, 225, 0.74);
+}
+
 .studyhubSiderMenu {
   flex: 1;
   background: transparent;
   border-right: 0;
-  padding: 8px 10px;
+  padding: 2px 10px 8px;
+}
+
+.studyhubSiderMenu.ant-menu-dark .ant-menu-item-group-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(203, 213, 225, 0.65);
+  margin: 6px 0 2px;
+  padding: 0 10px !important;
 }
 
 .studyhubSiderMenu.ant-menu-dark .ant-menu-item {
-  border-radius: 10px;
+  height: 42px;
+  line-height: 42px;
+  border-radius: 11px;
   margin: 4px 0;
+  font-size: 14px;
+  color: #cbd5e1;
 }
 
 .studyhubSiderMenu.ant-menu-dark .ant-menu-item:hover {
   background: @nav-hover;
+  color: #ffffff;
 }
 
 .studyhubSiderMenu.ant-menu-dark .ant-menu-item-selected {
-  background: #1e3a8a;
+  background: rgba(37, 99, 235, 0.3);
+  color: #ffffff;
+  box-shadow: inset 3px 0 0 #60a5fa;
+}
+
+.studyhubSiderMenu.ant-menu-dark .ant-menu-item-selected .anticon,
+.studyhubSiderMenu.ant-menu-dark .ant-menu-item:hover .anticon {
+  color: #ffffff;
+}
+
+.studyhubSiderNavLabel {
+  color: inherit;
+}
+
+.studyhubSiderContext {
+  margin: 8px 14px 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.66);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.studyhubSiderContext p {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(203, 213, 225, 0.72);
+}
+
+.studyhubSiderContext strong {
+  display: block;
+  margin-top: 5px;
+  color: #f8fafc;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.studyhubSiderContext span {
+  display: block;
+  margin-top: 4px;
+  color: rgba(203, 213, 225, 0.88);
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .studyhubSiderFooter {
   padding: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(148, 163, 184, 0.24);
 }
 
 .studyhubSiderTrigger {
   width: 100%;
   height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(148, 163, 184, 0.32);
   border-radius: 10px;
-  background: transparent;
+  background: rgba(148, 163, 184, 0.08);
   color: #e2e8f0;
   display: inline-flex;
   align-items: center;
@@ -123,14 +196,28 @@ body {
 }
 
 .studyhubSiderTrigger:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(37, 99, 235, 0.24);
+}
+
+.studyhubSider.ant-layout-sider-collapsed .studyhubSiderBrand {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.studyhubSider.ant-layout-sider-collapsed .studyhubSiderMenu.ant-menu-dark .ant-menu-item-group-title {
+  display: none;
+}
+
+.studyhubSider.ant-layout-sider-collapsed .studyhubSiderFooter {
+  border-top-color: transparent;
 }
 
 .studyhubHeader {
   background: transparent;
   padding: 0 24px;
-  height: 78px;
-  line-height: 78px;
+  height: auto;
+  line-height: 1.3;
 }
 
 .studyhubHeaderInner {
@@ -138,14 +225,16 @@ body {
   width: 100%;
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0 12px;
 }
 
 .studyhubHeaderMeta {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   line-height: 1.2;
 }
 
@@ -154,14 +243,21 @@ body {
   font-size: 12px;
   color: @text-muted;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08em;
 }
 
 .studyhubHeaderMeta h3 {
-  margin: 2px 0 0;
+  margin: 6px 0 0;
   color: @heading-color;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
+}
+
+.studyhubHeaderDescription {
+  margin: 8px 0 0;
+  color: @text-muted;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .studyhubPageLayout {
@@ -169,12 +265,323 @@ body {
 }
 
 .studyhubPageContent {
-  padding: 0 24px 28px;
+  padding: 6px 24px 34px;
 }
 
 .studyhubPageContentInner {
   max-width: 1180px;
   margin: 0 auto;
+}
+
+.studyhubDashboardHero {
+  border: 1px solid @surface-border;
+  border-radius: 16px;
+  background: linear-gradient(130deg, #ffffff 0%, @surface-soft 58%, #f1f6ff 100%);
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.studyhubDashboardHeroMeta {
+  min-width: 0;
+}
+
+.studyhubDashboardHeroKicker {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: @brand-blue;
+  font-weight: 600;
+}
+
+.studyhubDashboardHeroMeta h1 {
+  margin: 10px 0 0;
+  color: @heading-color;
+  font-size: 30px;
+  line-height: 1.16;
+}
+
+.studyhubDashboardHeroMeta p {
+  margin: 10px 0 0;
+  color: @text-muted;
+  font-size: 15px;
+}
+
+.studyhubDashboardHeroAction {
+  flex-shrink: 0;
+  padding-top: 8px;
+}
+
+.studyhubDashboardHeroAction .ant-btn {
+  border-radius: 10px;
+  height: 38px;
+  padding: 0 18px;
+  font-weight: 600;
+}
+
+.studyhubDashboardAlert {
+  margin-bottom: 18px;
+}
+
+.studyhubDashboardMetricsSection {
+  margin-bottom: 18px;
+}
+
+.studyhubDashboardProgressCard {
+  border: 1px solid @surface-border;
+  border-radius: 16px;
+  background: @surface;
+}
+
+.studyhubDashboardProgressHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.studyhubDashboardProgressHead p {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: @text-muted;
+}
+
+.studyhubDashboardProgressHead h2 {
+  margin: 8px 0 0;
+  color: @heading-color;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.studyhubDashboardProgressBadge {
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  background: #eff6ff;
+  padding: 9px 12px;
+  min-width: 110px;
+}
+
+.studyhubDashboardProgressBadge span {
+  display: block;
+  color: #1d4ed8;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.studyhubDashboardProgressBadge strong {
+  display: block;
+  margin-top: 2px;
+  color: #1e3a8a;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.studyhubDashboardProgressMeta {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.studyhubDashboardProgressMeta div {
+  border-radius: 12px;
+  border: 1px solid @surface-border;
+  background: @surface-soft;
+  padding: 10px 12px;
+}
+
+.studyhubDashboardProgressMeta span {
+  display: block;
+  font-size: 12px;
+  color: @text-muted;
+}
+
+.studyhubDashboardProgressMeta strong {
+  display: block;
+  margin-top: 4px;
+  color: @heading-color;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.studyhubCompactMetricCard {
+  height: 100%;
+  border-radius: 14px;
+  border: 1px solid @surface-border;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+}
+
+.studyhubCompactMetricCard p {
+  margin: 0;
+  font-size: 13px;
+  color: #334155;
+}
+
+.studyhubCompactMetricCard strong {
+  display: block;
+  margin-top: 8px;
+  color: @heading-color;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.studyhubCompactMetricCard span {
+  display: block;
+  margin-top: 8px;
+  color: @text-muted;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.studyhubCompactMetricCard.metric-blue {
+  border-left: 4px solid @brand-blue;
+}
+
+.studyhubCompactMetricCard.metric-violet {
+  border-left: 4px solid #6d28d9;
+}
+
+.studyhubCompactMetricCard.metric-cyan {
+  border-left: 4px solid @brand-cyan;
+}
+
+.studyhubCompactMetricCard.metric-pink {
+  border-left: 4px solid #be185d;
+}
+
+.studyhubDashboardInsightSection {
+  margin-top: 2px;
+}
+
+.studyhubDashboardPanel {
+  border: 1px solid @surface-border;
+  border-radius: 16px;
+  background: @surface;
+  margin-bottom: 16px;
+}
+
+.studyhubDashboardPanel .ant-card-head-title {
+  color: @heading-color;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.studyhubDashboardTableCount {
+  display: inline-flex;
+  min-width: 30px;
+  justify-content: center;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: @brand-indigo;
+  font-weight: 700;
+  padding: 0 10px;
+  line-height: 24px;
+}
+
+.studyhubDashboardStatusGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.studyhubDashboardStatusItem {
+  border-radius: 12px;
+  border: 1px solid @surface-border;
+  background: @surface-soft;
+  padding: 10px 12px;
+}
+
+.studyhubDashboardStatusItem span {
+  display: block;
+  font-size: 12px;
+  color: @text-muted;
+}
+
+.studyhubDashboardStatusItem strong {
+  display: block;
+  margin-top: 6px;
+  color: @heading-color;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.studyhubDashboardStatusHint {
+  margin-top: 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe7ff;
+  background: #eef4ff;
+  color: #1e3a8a;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 11px 12px;
+}
+
+.studyhubDashboardStatusHint.progress-excellent {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: @success-green;
+}
+
+.studyhubDashboardStatusHint.progress-stable {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: @brand-indigo;
+}
+
+.studyhubDashboardStatusHint.progress-focus {
+  border-color: #fed7aa;
+  background: #fff7ed;
+  color: @warning-amber;
+}
+
+.studyhubDashboardFocusPanel {
+  margin-bottom: 0;
+}
+
+.studyhubDashboardFocusList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.studyhubDashboardFocusItem {
+  border: 1px solid @surface-border;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: @surface-soft;
+}
+
+.studyhubDashboardFocusItem p {
+  margin: 0;
+  color: @heading-color;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.studyhubDashboardFocusItem span {
+  display: block;
+  margin-top: 4px;
+  color: @text-muted;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.studyhubDashboardFocusItem strong {
+  color: @brand-indigo;
+  font-size: 13px;
+  flex-shrink: 0;
 }
 
 .box {
@@ -322,5 +729,60 @@ body {
 
   .crudPageSearch {
     max-width: 100%;
+  }
+
+  .studyhubHeaderInner {
+    padding: 16px 0 10px;
+  }
+
+  .studyhubHeaderMeta h3 {
+    font-size: 20px;
+  }
+
+  .studyhubHeaderDescription {
+    font-size: 13px;
+  }
+
+  .studyhubDashboardHero {
+    flex-direction: column;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .studyhubDashboardHeroMeta h1 {
+    font-size: 25px;
+  }
+
+  .studyhubDashboardHeroMeta p {
+    font-size: 14px;
+  }
+
+  .studyhubDashboardHeroAction {
+    width: 100%;
+    padding-top: 2px;
+  }
+
+  .studyhubDashboardHeroAction .ant-btn {
+    width: 100%;
+  }
+
+  .studyhubDashboardProgressHead {
+    flex-direction: column;
+  }
+
+  .studyhubDashboardProgressHead h2 {
+    font-size: 26px;
+  }
+
+  .studyhubDashboardProgressBadge {
+    width: 100%;
+  }
+
+  .studyhubDashboardProgressMeta {
+    grid-template-columns: 1fr;
+  }
+
+  .studyhubDashboardStatusGrid {
+    grid-template-columns: 1fr;
   }
 }
